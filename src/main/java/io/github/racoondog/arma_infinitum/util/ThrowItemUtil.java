@@ -1,5 +1,6 @@
 package io.github.racoondog.arma_infinitum.util;
 
+import io.github.racoondog.arma_infinitum.Arma_infinitum;
 import io.github.racoondog.arma_infinitum.Configs;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
@@ -13,7 +14,7 @@ import net.minecraft.world.World;
 import java.util.Random;
 
 public class ThrowItemUtil {
-    public static final int spread = Configs.projectileSpread;
+    public static int spread = Arma_infinitum.config.projectileSpread;
 
     public static float getRandom(float start, Random random) {
         float randomFloat = random.nextFloat() * spread;
@@ -37,7 +38,7 @@ public class ThrowItemUtil {
 
     public static void shootEggs(World world, PlayerEntity user, ItemStack itemStack) {
         int level = EnchantmentHelper.getLevel(Enchantments.MULTISHOT, itemStack);
-        int count = countProjectiles(level, Configs.throwableCountingStyle);
+        int count = countProjectiles(level, Arma_infinitum.config.throwableCountingStyle);
         EggEntity entity = new EggEntity(world, user);
         entity.setItem(itemStack);
         EggEntity entity2;
@@ -48,7 +49,7 @@ public class ThrowItemUtil {
                 entity2.setProperties(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 1.0F);
                 world.spawnEntity(entity2);
             } else {
-                switch (Configs.throwableMultishotStyle) {
+                switch (Arma_infinitum.config.throwableMultishotStyle) {
                     case ANGLE: { //temp
                         entity2.setProperties(user, getRandom(user.getPitch(), random), getRandom(user.getYaw(), random), 0.0F, 1.5F, 1.0F);
                         world.spawnEntity(entity2);
@@ -68,7 +69,7 @@ public class ThrowItemUtil {
 
     public static void shootSnowballs(World world, PlayerEntity user, ItemStack itemStack) {
         int level = EnchantmentHelper.getLevel(Enchantments.MULTISHOT, itemStack);
-        int count = countProjectiles(level, Configs.throwableCountingStyle);
+        int count = countProjectiles(level, Arma_infinitum.config.throwableCountingStyle);
         SnowballEntity entity = new SnowballEntity(world, user);
         entity.setItem(itemStack);
         SnowballEntity entity2;
@@ -87,7 +88,7 @@ public class ThrowItemUtil {
 
     public static void shootEnderPearls(World world, PlayerEntity user, ItemStack itemStack) {
         int level = EnchantmentHelper.getLevel(Enchantments.MULTISHOT, itemStack);
-        int count = countProjectiles(level, Configs.throwableCountingStyle);
+        int count = countProjectiles(level, Arma_infinitum.config.throwableCountingStyle);
         EnderPearlEntity entity = new EnderPearlEntity(world, user);
         entity.setItem(itemStack);
         EnderPearlEntity entity2;
