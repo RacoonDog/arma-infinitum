@@ -1,6 +1,6 @@
 package io.github.racoondog.arma_infinitum.mixin;
 
-import io.github.racoondog.arma_infinitum.util.ThrowItemUtil;
+import io.github.racoondog.arma_infinitum.util.EnderPearlUtil;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.EnderPearlItem;
 import net.minecraft.item.ItemStack;
@@ -24,7 +24,7 @@ public abstract class EnderPearlItemMixin {
         ItemStack itemStack = user.getStackInHand(hand);
         world.playSound((PlayerEntity)null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_ENDER_PEARL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (world.getRandom().nextFloat() * 0.4F + 0.8F));
         user.getItemCooldownManager().set(itemStack.getItem(), 20);
-        if (!world.isClient) ThrowItemUtil.shootEnderPearls(world, user, itemStack);
+        if (!world.isClient) EnderPearlUtil.shootEnderPearls(world, user, itemStack);
 
         user.incrementStat(Stats.USED.getOrCreateStat(itemStack.getItem()));
         if (!user.getAbilities().creativeMode) {

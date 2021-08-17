@@ -4,14 +4,14 @@ import io.github.racoondog.arma_infinitum.Arma_infinitum;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.thrown.EggEntity;
+import net.minecraft.entity.projectile.thrown.EnderPearlEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class EggUtil {
-    public static void shootEggs(World world, PlayerEntity user, ItemStack itemStack) {
+public class EnderPearlUtil {
+    public static void shootEnderPearls(World world, PlayerEntity user, ItemStack itemStack) {
         int level = EnchantmentHelper.getLevel(Enchantments.MULTISHOT, itemStack);
         int count = ThrowItemUtil.countProjectiles(level, Arma_infinitum.config.throwableCountingStyle);
         Random random = user.getRandom();
@@ -32,7 +32,7 @@ public class EggUtil {
     }
 
     private static void shoot(World world, PlayerEntity user, ItemStack itemStack, float pitch, float yaw) {
-        EggEntity entity = new EggEntity(world, user);
+        EnderPearlEntity entity = new EnderPearlEntity(world, user);
         entity.setItem(itemStack);
         entity.setProperties(user, pitch, yaw, 0.0f, 1.5f, 1.0f);
         world.spawnEntity(entity);

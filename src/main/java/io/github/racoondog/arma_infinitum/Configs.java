@@ -7,7 +7,7 @@ import me.shedaniel.autoconfig.annotation.Config;
 public class Configs implements ConfigData {
     public final int projectileSpread = 20;
 
-    public final MultishotStyle crossbowMultishotStyle = MultishotStyle.HYBRID;
+    public final MultishotStyle crossbowMultishotStyle = MultishotStyle.ANGLE;
     public final MultishotStyle bowMultishotStyle = MultishotStyle.RANDOM;
     public final MultishotStyle throwableMultishotStyle = MultishotStyle.RANDOM;
 
@@ -19,8 +19,7 @@ public class Configs implements ConfigData {
 
     public enum MultishotStyle {
         ANGLE,
-        RANDOM,
-        HYBRID;
+        RANDOM;
     }
 
     public enum ProjectileCountingStyle {

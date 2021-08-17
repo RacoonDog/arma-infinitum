@@ -1,6 +1,6 @@
 package io.github.racoondog.arma_infinitum.mixin;
 
-import io.github.racoondog.arma_infinitum.util.ThrowItemUtil;
+import io.github.racoondog.arma_infinitum.util.SnowballUtil;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SnowballItem;
@@ -23,7 +23,7 @@ public abstract class SnowballItemMixin {
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
         world.playSound((PlayerEntity)null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_SNOWBALL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (world.getRandom().nextFloat() * 0.4F + 0.8F));
-        if (!world.isClient) ThrowItemUtil.shootSnowballs(world, user, itemStack);
+        if (!world.isClient) SnowballUtil.shootSnowballs(world, user, itemStack);
 
         user.incrementStat(Stats.USED.getOrCreateStat(itemStack.getItem()));
         if (!user.getAbilities().creativeMode) {
