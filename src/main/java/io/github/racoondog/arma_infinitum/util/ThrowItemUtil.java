@@ -16,7 +16,7 @@ import java.util.Random;
 public class ThrowItemUtil {
     public static int spread = Arma_infinitum.config.projectileSpread;
 
-    public static float getRandom(float start, Random random) {
+    public static float genRandom(float start, Random random) {
         float randomFloat = random.nextFloat() * spread;
         randomFloat = randomFloat - spread / 2;
         return start + randomFloat;
@@ -36,37 +36,6 @@ public class ThrowItemUtil {
         }
     }
 
-    public static void shootEggs(World world, PlayerEntity user, ItemStack itemStack) {
-        int level = EnchantmentHelper.getLevel(Enchantments.MULTISHOT, itemStack);
-        int count = countProjectiles(level, Arma_infinitum.config.throwableCountingStyle);
-        EggEntity entity = new EggEntity(world, user);
-        entity.setItem(itemStack);
-        EggEntity entity2;
-        Random random = user.getRandom();
-        for (int i = 0; i < count; ++i) {
-            entity2 = entity;
-            if (i == 1) {
-                entity2.setProperties(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 1.0F);
-                world.spawnEntity(entity2);
-            } else {
-                switch (Arma_infinitum.config.throwableMultishotStyle) {
-                    case ANGLE: { //temp
-                        entity2.setProperties(user, getRandom(user.getPitch(), random), getRandom(user.getYaw(), random), 0.0F, 1.5F, 1.0F);
-                        world.spawnEntity(entity2);
-                    }
-                    case HYBRID: { //temp
-                        entity2.setProperties(user, getRandom(user.getPitch(), random), getRandom(user.getYaw(), random), 0.0F, 1.5F, 1.0F);
-                        world.spawnEntity(entity2);
-                    }
-                    default: { //case RANDOM
-                        entity2.setProperties(user, getRandom(user.getPitch(), random), getRandom(user.getYaw(), random), 0.0F, 1.5F, 1.0F);
-                        world.spawnEntity(entity2);
-                    }
-                }
-            }
-        }
-    }
-
     public static void shootSnowballs(World world, PlayerEntity user, ItemStack itemStack) {
         int level = EnchantmentHelper.getLevel(Enchantments.MULTISHOT, itemStack);
         int count = countProjectiles(level, Arma_infinitum.config.throwableCountingStyle);
@@ -80,7 +49,7 @@ public class ThrowItemUtil {
                 entity2.setProperties(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 1.0F);
                 world.spawnEntity(entity2);
             } else {
-                entity2.setProperties(user, getRandom(user.getPitch(), random), getRandom(user.getYaw(), random), 0.0F, 1.5F, 1.0F);
+                entity2.setProperties(user, genRandom(user.getPitch(), random), genRandom(user.getYaw(), random), 0.0F, 1.5F, 1.0F);
                 world.spawnEntity(entity2);
             }
         }
@@ -99,7 +68,7 @@ public class ThrowItemUtil {
                 entity2.setProperties(user, user.getPitch(), user.getYaw(), 0.0F, 1.5F, 1.0F);
                 world.spawnEntity(entity2);
             } else {
-                entity2.setProperties(user, getRandom(user.getPitch(), random), getRandom(user.getYaw(), random), 0.0F, 1.5F, 1.0F);
+                entity2.setProperties(user, genRandom(user.getPitch(), random), genRandom(user.getYaw(), random), 0.0F, 1.5F, 1.0F);
                 world.spawnEntity(entity2);
             }
         }
