@@ -8,10 +8,10 @@ Due to the fact this could very easily end up completely breaking any sort of ba
 
 - Maximum projectile thrown at once is capped at 255.
 
-### Links
+## Links
 
 **Curseforge page:** W.I.P
 
-### Contributors
+## Contributors
 
 **Coders:** Crosby (RacoonDog)
