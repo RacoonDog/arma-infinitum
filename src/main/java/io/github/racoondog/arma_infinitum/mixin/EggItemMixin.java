@@ -1,7 +1,6 @@
 package io.github.racoondog.arma_infinitum.mixin;
 
 import io.github.racoondog.arma_infinitum.util.EggUtil;
-import io.github.racoondog.arma_infinitum.util.ThrowItemUtil;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.EggItem;
 import net.minecraft.item.ItemStack;
