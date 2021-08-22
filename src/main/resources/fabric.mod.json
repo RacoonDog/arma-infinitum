@@ -4,8 +4,14 @@
   "version": "${version}",
   "name": "Arma Infinitum",
   "description": "",
-  "authors": [],
-  "contact": {},
+  "authors": ["GGCrosby"],
+  "contributors": ["Hexerick"],
+  "contact": {
+    "email": "ggcrosbyyt@gmail.com",
+    "sources": "https://github.com/RacoonDog/arma-infinitum",
+    "issues": "https://github.com/RacoonDog/arma-infinitum/issues",
+    "discord": "Crosby#9153"
+  },
   "license": "All-Rights-Reserved",
   "icon": "assets/arma_infinitum/icon.png",
   "environment": "*",
@@ -20,6 +26,8 @@
   "depends": {
     "fabricloader": ">=0.11.6",
     "fabric": "*",
-    "minecraft": "1.17.1"
+    "minecraft": "1.17.x",
+    "java": ">=16",
+    "cloth-config2": "*"
   }
 }

@@ -7,6 +7,7 @@ Due to the fact this could very easily end up completely breaking any sort of ba
 ## Known Issues
 
 - Maximum projectile thrown at once is capped at 255.
+- 'Maximum sound pool size 247 reached' error message upon using very high multishot levels.
 
 ## Links
 
@@ -15,3 +16,4 @@ Due to the fact this could very easily end up completely breaking any sort of ba
 ## Contributors
 
 **Coders:** Crosby (RacoonDog)
+**Artist:** Hexerick
