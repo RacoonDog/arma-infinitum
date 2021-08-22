@@ -1,5 +1,8 @@
 package io.github.racoondog.arma_infinitum.mixin;
 
+import io.github.racoondog.arma_infinitum.Arma_infinitum;
+import io.github.racoondog.arma_infinitum.Configs;
+import io.github.racoondog.arma_infinitum.util.CrossbowUtil;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
@@ -13,6 +16,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 
 import java.util.List;
+import java.util.Random;
 
 @Mixin(CrossbowItem.class)
 public abstract class CrossbowItemMixin {
@@ -23,7 +27,7 @@ public abstract class CrossbowItemMixin {
     @Overwrite
     public static void shootAll(World world, LivingEntity entity, Hand hand, ItemStack stack, float speed, float divergence) {
         List<ItemStack> list = CrossbowItemInvoker.invokeGetProjectiles(stack);
-        float[] fs = CrossbowItemInvoker.invokeGetSoundPitches(entity.getRandom());
+        float[] fs = CrossbowUtil.getSoundPitches(entity.getRandom(), list.size());
 
         for(int i = 0; i < list.size(); ++i) {
             ItemStack itemStack = (ItemStack)list.get(i);
@@ -59,12 +63,16 @@ public abstract class CrossbowItemMixin {
     private static boolean loadProjectiles(LivingEntity shooter, ItemStack projectile) {
         int i = EnchantmentHelper.getLevel(Enchantments.MULTISHOT, projectile);
         int j;
-        if (i == 0) {
-            j = 1;
-        } else if (i == 1 || i == 2) {
-            j = 3;
+        if (Arma_infinitum.config.crossbowCountingStyle == Configs.ProjectileCountingStyle.INCREMENTAL) {
+            j = i + 1;
         } else {
-            j = i;
+            if (i == 0) {
+                j = 1;
+            } else if (i == 1 || i == 2) {
+                j = 3;
+            } else {
+                j = i;
+            }
         }
         boolean bl = shooter instanceof PlayerEntity && ((PlayerEntity)shooter).getAbilities().creativeMode;
         ItemStack itemStack = shooter.getArrowType(projectile);
