@@ -6,7 +6,7 @@ import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
 
 @Config(name = Arma_infinitum.modid)
 public class Configs implements ConfigData {
-    @Comment(value = "hold on gotta make a wiki real quick")
+    @Comment(value = "https://github.com/RacoonDog/arma-infinitum/wiki/Config")
     public final int projectileSpread = 20;
 
     //public final MultishotStyle crossbowMultishotStyle = MultishotStyle.ANGLE;
