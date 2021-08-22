@@ -15,5 +15,5 @@ Due to the fact this could very easily end up completely breaking any sort of ba
 
 ## Contributors
 
-**Coders:** Crosby (RacoonDog)
+**Coders:** Crosby (RacoonDog)  
 **Artist:** Hexerick
