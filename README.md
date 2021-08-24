@@ -11,7 +11,7 @@ Due to the fact this could very easily end up completely breaking any sort of ba
 
 ## Links
 
-**Curseforge page:** W.I.P
+**Curseforge page:** https://www.curseforge.com/minecraft/mc-mods/arma-infinitum
 
 ## Contributors
 
