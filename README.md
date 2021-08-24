@@ -9,6 +9,10 @@ Due to the fact this could very easily end up completely breaking any sort of ba
 - Maximum projectile thrown at once is capped at 255.
 - 'Maximum sound pool size 247 reached' error message upon using very high multishot levels.
 
+## Dependencies
+- [**Fabric API**](https://www.curseforge.com/minecraft/mc-mods/fabric-api)
+- [**Cloth Config API**](https://www.curseforge.com/minecraft/mc-mods/cloth-config)
+
 ## Links
 
 **Curseforge page:** https://www.curseforge.com/minecraft/mc-mods/arma-infinitum
@@ -17,3 +21,12 @@ Due to the fact this could very easily end up completely breaking any sort of ba
 
 **Coders:** Crosby (RacoonDog)  
 **Artist:** Hexerick
+
+## Contact me
+**Crosby#9153 / ggcrosbyyt@gmail.com**
+
+## Disclaimers
+
+You are not allowed to repost this mod or its contents to other websites.  
+You are free to use this mod in a modpack.  
+I reserve all rights to this mod however, you are allowed to use any of my code as a base and to copy any code in classes that have 'Util' in the name.
