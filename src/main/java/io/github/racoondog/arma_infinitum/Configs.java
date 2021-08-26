@@ -8,6 +8,7 @@ import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
 public class Configs implements ConfigData {
     @Comment(value = "https://github.com/RacoonDog/arma-infinitum/wiki/Config")
     public final int projectileSpread = 20;
+    public final int soundEffects = 225;
 
     //public final MultishotStyle crossbowMultishotStyle = MultishotStyle.ANGLE;
     //public final MultishotStyle bowMultishotStyle = MultishotStyle.RANDOM;

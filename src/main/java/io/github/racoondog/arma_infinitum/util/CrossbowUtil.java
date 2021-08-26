@@ -1,6 +1,23 @@
 package io.github.racoondog.arma_infinitum.util;
 
+import io.github.racoondog.arma_infinitum.Arma_infinitum;
 import io.github.racoondog.arma_infinitum.mixin.CrossbowItemInvoker;
+import net.minecraft.entity.CrossbowUser;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.FireworkRocketEntity;
+import net.minecraft.entity.projectile.PersistentProjectileEntity;
+import net.minecraft.entity.projectile.ProjectileEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.Hand;
+import net.minecraft.util.math.Quaternion;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vec3f;
+import net.minecraft.world.World;
 
 import java.util.Random;
 
@@ -18,5 +35,38 @@ public class CrossbowUtil {
             }
         }
         return output;
+    }
+
+    public static void shoot(World world, LivingEntity shooter, Hand hand, ItemStack crossbow, ItemStack projectile, float soundPitch, boolean creative, float speed, float divergence, float simulated, int index) {
+        if (!world.isClient) {
+            boolean bl = projectile.isOf(Items.FIREWORK_ROCKET);
+            Object projectileEntity2;
+            if (bl) {
+                projectileEntity2 = new FireworkRocketEntity(world, projectile, shooter, shooter.getX(), shooter.getEyeY() - 0.15000000596046448D, shooter.getZ(), true);
+            } else {
+                projectileEntity2 = CrossbowItemInvoker.invokeCreateArrow(world, shooter, crossbow, projectile);
+                if (creative || simulated != 0.0F) {
+                    ((PersistentProjectileEntity)projectileEntity2).pickupType = PersistentProjectileEntity.PickupPermission.CREATIVE_ONLY;
+                }
+            }
+
+            if (shooter instanceof CrossbowUser) {
+                CrossbowUser crossbowUser = (CrossbowUser)shooter;
+                crossbowUser.shoot(crossbowUser.getTarget(), crossbow, (ProjectileEntity)projectileEntity2, simulated);
+            } else {
+                Vec3d vec3d = shooter.getOppositeRotationVector(1.0F);
+                Quaternion quaternion = new Quaternion(new Vec3f(vec3d), simulated, true);
+                Vec3d vec3d2 = shooter.getRotationVec(1.0F);
+                Vec3f vec3f = new Vec3f(vec3d2);
+                vec3f.rotate(quaternion);
+                ((ProjectileEntity)projectileEntity2).setVelocity((double)vec3f.getX(), (double)vec3f.getY(), (double)vec3f.getZ(), speed, divergence);
+            }
+
+            crossbow.damage(bl ? 3 : 1, shooter, (e) -> {
+                e.sendToolBreakStatus(hand);
+            });
+            world.spawnEntity((Entity)projectileEntity2);
+            if (index < Arma_infinitum.config.soundEffects) world.playSound((PlayerEntity)null, shooter.getX(), shooter.getY(), shooter.getZ(), SoundEvents.ITEM_CROSSBOW_SHOOT, SoundCategory.PLAYERS, 1.0F, soundPitch);
+        }
     }
 }

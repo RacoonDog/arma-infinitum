@@ -5,12 +5,22 @@ import io.github.racoondog.arma_infinitum.Configs;
 import io.github.racoondog.arma_infinitum.util.CrossbowUtil;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.CrossbowUser;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.FireworkRocketEntity;
+import net.minecraft.entity.projectile.PersistentProjectileEntity;
+import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
+import net.minecraft.util.math.Quaternion;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.Vec3f;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -29,24 +39,24 @@ public abstract class CrossbowItemMixin {
         List<ItemStack> list = CrossbowItemInvoker.invokeGetProjectiles(stack);
         float[] fs = CrossbowUtil.getSoundPitches(entity.getRandom(), list.size());
 
-        for(int i = 0; i < list.size(); ++i) {
-            ItemStack itemStack = (ItemStack)list.get(i);
-            boolean bl = entity instanceof PlayerEntity && ((PlayerEntity)entity).getAbilities().creativeMode;
+        for (int i = 0; i < list.size(); ++i) {
+            ItemStack itemStack = (ItemStack) list.get(i);
+            boolean bl = entity instanceof PlayerEntity && ((PlayerEntity) entity).getAbilities().creativeMode;
             if (!itemStack.isEmpty()) {
                 if (list.size() > 3) {
                     if (i == 0) {
-                        CrossbowItemInvoker.invokeShoot(world, entity, hand, stack, itemStack, fs[i], bl, speed, divergence, 0.0F);
+                        CrossbowUtil.shoot(world, entity, hand, stack, itemStack, fs[i], bl, speed, divergence, 0.0F, i);
                     } else {
                         float r = entity.getRandom().nextFloat() * 20 - 10;
-                        CrossbowItemInvoker.invokeShoot(world, entity, hand, stack, itemStack, fs[i], bl, speed, divergence, r);
+                        CrossbowUtil.shoot(world, entity, hand, stack, itemStack, fs[i], bl, speed, divergence, r, i);
                     }
                 } else {
                     if (i == 0) {
-                        CrossbowItemInvoker.invokeShoot(world, entity, hand, stack, itemStack, fs[i], bl, speed, divergence, 0.0F);
+                        CrossbowUtil.shoot(world, entity, hand, stack, itemStack, fs[i], bl, speed, divergence, 0.0F, i);
                     } else if (i == 1) {
-                        CrossbowItemInvoker.invokeShoot(world, entity, hand, stack, itemStack, fs[i], bl, speed, divergence, -10.0F);
+                        CrossbowUtil.shoot(world, entity, hand, stack, itemStack, fs[i], bl, speed, divergence, -10.0F, i);
                     } else if (i == 2) {
-                        CrossbowItemInvoker.invokeShoot(world, entity, hand, stack, itemStack, fs[i], bl, speed, divergence, 10.0F);
+                        CrossbowUtil.shoot(world, entity, hand, stack, itemStack, fs[i], bl, speed, divergence, 10.0F, i);
                     }
                 }
             }
@@ -74,11 +84,11 @@ public abstract class CrossbowItemMixin {
                 j = i;
             }
         }
-        boolean bl = shooter instanceof PlayerEntity && ((PlayerEntity)shooter).getAbilities().creativeMode;
+        boolean bl = shooter instanceof PlayerEntity && ((PlayerEntity) shooter).getAbilities().creativeMode;
         ItemStack itemStack = shooter.getArrowType(projectile);
         ItemStack itemStack2 = itemStack.copy();
 
-        for(int k = 0; k < j; ++k) {
+        for (int k = 0; k < j; ++k) {
             if (k > 0) {
                 itemStack = itemStack2.copy();
             }

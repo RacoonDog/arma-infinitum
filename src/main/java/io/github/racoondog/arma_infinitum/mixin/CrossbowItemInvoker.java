@@ -1,6 +1,7 @@
 package io.github.racoondog.arma_infinitum.mixin;
 
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Hand;
@@ -19,7 +20,7 @@ public interface CrossbowItemInvoker {
     }
 
     @Invoker
-    static void invokeShoot(World world, LivingEntity shooter, Hand hand, ItemStack crossbow, ItemStack projectile, float soundPitch, boolean creative, float speed, float divergence, float simulated) {
+    static PersistentProjectileEntity invokeCreateArrow(World world, LivingEntity entity, ItemStack crossbow, ItemStack arrow) {
         throw new AssertionError();
     }
 
