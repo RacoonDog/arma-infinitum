@@ -2,6 +2,8 @@ package io.github.racoondog.arma_infinitum.util;
 
 import io.github.racoondog.arma_infinitum.Arma_infinitum;
 import io.github.racoondog.arma_infinitum.mixin.CrossbowItemInvoker;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.CrossbowUser;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -60,6 +62,10 @@ public class CrossbowUtil {
                 Vec3f vec3f = new Vec3f(vec3d2);
                 vec3f.rotate(quaternion);
                 ((ProjectileEntity)projectileEntity2).setVelocity((double)vec3f.getX(), (double)vec3f.getY(), (double)vec3f.getZ(), speed, divergence);
+            }
+
+            if (EnchantmentHelper.getLevel(Enchantments.FLAME, crossbow) > 0) {
+                ((Entity)projectileEntity2).setOnFireFor(100 * EnchantmentHelper.getLevel(Enchantments.FLAME, crossbow));
             }
 
             crossbow.damage(bl ? 3 : 1, shooter, (e) -> {

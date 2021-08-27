@@ -35,6 +35,9 @@ public class EnderPearlUtil {
         EnderPearlEntity entity = new EnderPearlEntity(world, user);
         entity.setItem(itemStack);
         entity.setProperties(user, pitch, yaw, 0.0f, 1.5f, 1.0f);
+        if (EnchantmentHelper.getLevel(Enchantments.FLAME, itemStack) > 0) {
+            entity.setOnFireFor(100 * EnchantmentHelper.getLevel(Enchantments.FLAME, itemStack));
+        }
         world.spawnEntity(entity);
     }
 }

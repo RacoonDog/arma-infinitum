@@ -7,9 +7,10 @@ Due to the fact this could very easily end up completely breaking any sort of ba
 ## Known Issues
 
 - Maximum projectile thrown at once is capped at 255.
-- 'Maximum sound pool size 247 reached' error message upon using very high multishot levels.
+- Throwable items with flame dont set hit entities on fire.
 
 ## Dependencies
+
 - [**Fabric API**](https://www.curseforge.com/minecraft/mc-mods/fabric-api)
 - [**Cloth Config API**](https://www.curseforge.com/minecraft/mc-mods/cloth-config)
 
@@ -23,6 +24,7 @@ Due to the fact this could very easily end up completely breaking any sort of ba
 **Artist:** Hexerick
 
 ## Contact me
+
 **Crosby#9153 / ggcrosbyyt@gmail.com**
 
 ## Disclaimers

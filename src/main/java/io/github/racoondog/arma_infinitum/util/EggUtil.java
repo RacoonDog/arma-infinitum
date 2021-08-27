@@ -3,6 +3,7 @@ package io.github.racoondog.arma_infinitum.util;
 import io.github.racoondog.arma_infinitum.Arma_infinitum;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.thrown.EggEntity;
 import net.minecraft.item.ItemStack;
@@ -35,6 +36,9 @@ public class EggUtil {
         EggEntity entity = new EggEntity(world, user);
         entity.setItem(itemStack);
         entity.setProperties(user, pitch, yaw, 0.0f, 1.5f, 1.0f);
+        if (EnchantmentHelper.getLevel(Enchantments.FLAME, itemStack) > 0) {
+            entity.setOnFireFor(100 * EnchantmentHelper.getLevel(Enchantments.FLAME, itemStack));
+        }
         world.spawnEntity(entity);
     }
 }
