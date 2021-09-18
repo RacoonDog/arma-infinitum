@@ -31,3 +31,5 @@ Due to the fact this could very easily end up completely breaking any sort of ba
 You are not allowed to repost this mod or its contents to other websites.  
 You are free to use this mod in a modpack.  
 I reserve all rights to this mod. However, you are allowed to use any of my code as a base and to copy any code in classes that have 'Util' in the name.
+  
+Yes I am aware I am overusing mixin overwrites
