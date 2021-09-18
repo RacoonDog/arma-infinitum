@@ -7,8 +7,9 @@
     "CrossbowItemInvoker",
     "CrossbowItemMixin",
     "EggItemMixin",
-    "SnowballItemMixin",
-    "EnderPearlItemMixin"
+    "EnderPearlItemMixin",
+    "ProjectileEntityMixin",
+    "SnowballItemMixin"
   ],
   "client": [
   ],
