@@ -7,7 +7,6 @@ Due to the fact this could very easily end up completely breaking any sort of ba
 ## Known Issues
 
 - Maximum projectile thrown at once is capped at 255.
-- Throwable items with flame dont set hit entities on fire.
 
 ## Dependencies
 
