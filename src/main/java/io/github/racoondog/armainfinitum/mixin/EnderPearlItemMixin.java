@@ -1,8 +1,8 @@
-package io.github.racoondog.arma_infinitum.mixin;
+package io.github.racoondog.armainfinitum.mixin;
 
-import io.github.racoondog.arma_infinitum.util.EggUtil;
+import io.github.racoondog.armainfinitum.util.EnderPearlUtil;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.EggItem;
+import net.minecraft.item.EnderPearlItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -13,9 +13,8 @@ import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 
-@Mixin(EggItem.class)
-public abstract class EggItemMixin {
-
+@Mixin(EnderPearlItem.class)
+public abstract class EnderPearlItemMixin {
     /**
      * @author
      * @reason
@@ -23,8 +22,9 @@ public abstract class EggItemMixin {
     @Overwrite
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
-        world.playSound((PlayerEntity)null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_EGG_THROW, SoundCategory.PLAYERS, 0.5F, 0.4F / (world.getRandom().nextFloat() * 0.4F + 0.8F));
-        if (!world.isClient) EggUtil.shootEggs(world, user, itemStack);
+        world.playSound((PlayerEntity)null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_ENDER_PEARL_THROW, SoundCategory.NEUTRAL, 0.5F, 0.4F / (world.getRandom().nextFloat() * 0.4F + 0.8F));
+        user.getItemCooldownManager().set(itemStack.getItem(), 20);
+        if (!world.isClient) EnderPearlUtil.shootEnderPearls(world, user, itemStack);
 
         user.incrementStat(Stats.USED.getOrCreateStat(itemStack.getItem()));
         if (!user.getAbilities().creativeMode) {

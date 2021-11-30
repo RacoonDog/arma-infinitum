@@ -1,4 +1,4 @@
-package io.github.racoondog.arma_infinitum.mixin;
+package io.github.racoondog.armainfinitum.mixin;
 
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
@@ -19,13 +19,12 @@ import org.spongepowered.asm.mixin.Overwrite;
 @Mixin(BowItem.class)
 public abstract class BowItemMixin {
     /**
-     * @author
+     * @author crosby
      * @reason
      */
     @Overwrite
     public void onStoppedUsing(ItemStack stack, World world, LivingEntity user, int remainingUseTicks) {
-        if (user instanceof PlayerEntity) {
-            PlayerEntity playerEntity = (PlayerEntity)user;
+        if (user instanceof PlayerEntity playerEntity) {
             boolean bl = playerEntity.getAbilities().creativeMode || EnchantmentHelper.getLevel(Enchantments.INFINITY, stack) > 0;
             ItemStack itemStack = playerEntity.getArrowType(stack);
             if (!itemStack.isEmpty() || bl) {

@@ -1,0 +1,7 @@
+{
+  "gamerule.projectileSpread": "Projectile spread",
+  "gamerule.throwableMultishotRandom": "Throwable items multishot random angles",
+  "gamerule.bowMultishotRandom": "Bow multishot random angles",
+  "gamerule.crossbowMultishotRandom": "Crossbow multishot random angles",
+  "gamerule.dispenserCompatible": "Arma Infinitum compatible with dispensers"
+}

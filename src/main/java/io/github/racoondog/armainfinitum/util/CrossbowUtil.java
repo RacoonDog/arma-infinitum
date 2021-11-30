@@ -1,7 +1,6 @@
-package io.github.racoondog.arma_infinitum.util;
+package io.github.racoondog.armainfinitum.util;
 
-import io.github.racoondog.arma_infinitum.Arma_infinitum;
-import io.github.racoondog.arma_infinitum.mixin.CrossbowItemInvoker;
+import io.github.racoondog.armainfinitum.mixin.CrossbowItemInvoker;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.CrossbowUser;
@@ -52,8 +51,7 @@ public class CrossbowUtil {
                 }
             }
 
-            if (shooter instanceof CrossbowUser) {
-                CrossbowUser crossbowUser = (CrossbowUser)shooter;
+            if (shooter instanceof CrossbowUser crossbowUser) {
                 crossbowUser.shoot(crossbowUser.getTarget(), crossbow, (ProjectileEntity)projectileEntity2, simulated);
             } else {
                 Vec3d vec3d = shooter.getOppositeRotationVector(1.0F);
@@ -72,7 +70,7 @@ public class CrossbowUtil {
                 e.sendToolBreakStatus(hand);
             });
             world.spawnEntity((Entity)projectileEntity2);
-            if (index < Arma_infinitum.config.soundEffects) world.playSound((PlayerEntity)null, shooter.getX(), shooter.getY(), shooter.getZ(), SoundEvents.ITEM_CROSSBOW_SHOOT, SoundCategory.PLAYERS, 1.0F, soundPitch);
+            if (index < 25) world.playSound((PlayerEntity)null, shooter.getX(), shooter.getY(), shooter.getZ(), SoundEvents.ITEM_CROSSBOW_SHOOT, SoundCategory.PLAYERS, 1.0F, soundPitch);
         }
     }
 }

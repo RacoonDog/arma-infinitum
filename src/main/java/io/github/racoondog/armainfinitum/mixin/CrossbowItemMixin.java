@@ -1,42 +1,38 @@
-package io.github.racoondog.arma_infinitum.mixin;
+package io.github.racoondog.armainfinitum.mixin;
 
-import io.github.racoondog.arma_infinitum.Arma_infinitum;
-import io.github.racoondog.arma_infinitum.Configs;
-import io.github.racoondog.arma_infinitum.util.CrossbowUtil;
+import io.github.racoondog.armainfinitum.util.CrossbowUtil;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.CrossbowUser;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.FireworkRocketEntity;
-import net.minecraft.entity.projectile.PersistentProjectileEntity;
-import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.item.CrossbowItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
-import net.minecraft.util.math.Quaternion;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.Vec3f;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 import java.util.List;
-import java.util.Random;
 
 @Mixin(CrossbowItem.class)
 public abstract class CrossbowItemMixin {
+    @Shadow private static void postShoot(World world, LivingEntity entity, ItemStack stack) {}
+
+    @Shadow private static boolean loadProjectile(LivingEntity shooter, ItemStack crossbow, ItemStack projectile, boolean simulated, boolean creative) { throw new AssertionError(); }
+
+    @Shadow private static List<ItemStack> getProjectiles(ItemStack crossbow) { throw new AssertionError(); }
+
     /**
-     * @author
+     * @author crosby
      * @reason
      */
     @Overwrite
     public static void shootAll(World world, LivingEntity entity, Hand hand, ItemStack stack, float speed, float divergence) {
-        List<ItemStack> list = CrossbowItemInvoker.invokeGetProjectiles(stack);
+        List<ItemStack> list = getProjectiles(stack);
         float[] fs = CrossbowUtil.getSoundPitches(entity.getRandom(), list.size());
 
         for (int i = 0; i < list.size(); ++i) {
@@ -62,27 +58,24 @@ public abstract class CrossbowItemMixin {
             }
         }
 
-        CrossbowItemInvoker.invokePostShoot(world, entity, stack);
+        postShoot(world, entity, stack);
     }
 
     /**
-     * @author
+     * @author crosby
      * @reason
+     * @todo replace by modifying the value of 'j' in the original method
      */
     @Overwrite
     private static boolean loadProjectiles(LivingEntity shooter, ItemStack projectile) {
         int i = EnchantmentHelper.getLevel(Enchantments.MULTISHOT, projectile);
         int j;
-        if (Arma_infinitum.config.crossbowCountingStyle == Configs.ProjectileCountingStyle.INCREMENTAL) {
-            j = i + 1;
+        if (i == 0) { //count projectiles
+            j = 1;
+        } else if (i == 1 || i == 2) {
+            j = 3;
         } else {
-            if (i == 0) {
-                j = 1;
-            } else if (i == 1 || i == 2) {
-                j = 3;
-            } else {
-                j = i;
-            }
+            j = i;
         }
         boolean bl = shooter instanceof PlayerEntity && ((PlayerEntity) shooter).getAbilities().creativeMode;
         ItemStack itemStack = shooter.getArrowType(projectile);
@@ -98,7 +91,7 @@ public abstract class CrossbowItemMixin {
                 itemStack2 = itemStack.copy();
             }
 
-            if (!CrossbowItemInvoker.invokeLoadProjectile(shooter, projectile, itemStack, k > 0, bl)) {
+            if (!loadProjectile(shooter, projectile, itemStack, k > 0, bl)) {
                 return false;
             }
         }

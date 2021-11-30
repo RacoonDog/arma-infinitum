@@ -1,4 +1,4 @@
-package io.github.racoondog.arma_infinitum.mixin;
+package io.github.racoondog.armainfinitum.mixin;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;

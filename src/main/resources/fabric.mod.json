@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "arma_infinitum",
+  "id": "armainfinitum",
   "version": "${version}",
   "name": "Arma Infinitum",
   "description": "",
@@ -13,21 +13,20 @@
     "discord": "Crosby#9153"
   },
   "license": "All-Rights-Reserved",
-  "icon": "assets/arma_infinitum/icon.png",
+  "icon": "assets/armainfinitum/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "io.github.racoondog.arma_infinitum.Arma_infinitum"
+      "io.github.racoondog.armainfinitum.ArmaInfinitum"
     ]
   },
   "mixins": [
-    "arma_infinitum.mixins.json"
+    "armainfinitum.mixins.json"
   ],
   "depends": {
+    "java": ">=16",
     "fabricloader": ">=0.11.6",
     "fabric": "*",
-    "minecraft": "1.17.x",
-    "java": ">=16",
-    "cloth-config2": "*"
+    "minecraft": "1.17.x"
   }
 }

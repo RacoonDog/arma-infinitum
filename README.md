@@ -6,12 +6,12 @@ Due to the fact this could very easily end up completely breaking any sort of ba
 
 ## Known Issues
 
-- Maximum projectile thrown at once is capped at 255.
+- Maximum projectiles thrown at once is capped at 255.
+- Crossbow projectiles do not adhere to the projectile spread gamerule.
 
 ## Dependencies
 
 - [**Fabric API**](https://www.curseforge.com/minecraft/mc-mods/fabric-api)
-- [**Cloth Config API**](https://www.curseforge.com/minecraft/mc-mods/cloth-config)
 
 ## Links
 
