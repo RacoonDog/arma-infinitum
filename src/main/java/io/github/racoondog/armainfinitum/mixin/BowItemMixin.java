@@ -40,8 +40,7 @@ public abstract class BowItemMixin {
                     BowUtil.shoot(world, user, stack, ThrowItemUtil.genRandom(user.getPitch(), random, spread), ThrowItemUtil.genRandom(user.getYaw(), random, spread), f);
                 } else {
                     //Not Random
-                    //Temp
-                    BowUtil.shoot(world, user, stack, ThrowItemUtil.genRandom(user.getPitch(), random, spread), ThrowItemUtil.genRandom(user.getYaw(), random, spread), f);
+                    BowUtil.shoot(world, user, stack, user.getPitch(), ThrowItemUtil.genAngle(user.getYaw(), count, i, spread), f);
                 }
             }
         }

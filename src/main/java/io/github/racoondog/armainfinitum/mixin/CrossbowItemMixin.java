@@ -1,6 +1,8 @@
 package io.github.racoondog.armainfinitum.mixin;
 
+import io.github.racoondog.armainfinitum.ArmaInfinitum;
 import io.github.racoondog.armainfinitum.util.CrossbowUtil;
+import io.github.racoondog.armainfinitum.util.ThrowItemUtil;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.LivingEntity;
@@ -33,16 +35,21 @@ public abstract class CrossbowItemMixin {
         List<ItemStack> list = getProjectiles(stack);
         float[] fs = CrossbowUtil.getSoundPitches(entity.getRandom(), list.size());
 
+        int spread = world.getGameRules().getInt(ArmaInfinitum.PROJECTILE_SPREAD);
+
         for (int i = 0; i < list.size(); ++i) {
             ItemStack itemStack = (ItemStack) list.get(i);
             boolean bl = entity instanceof PlayerEntity && ((PlayerEntity) entity).getAbilities().creativeMode;
             if (!itemStack.isEmpty()) {
                 if (list.size() > 3) {
-                    if (i == 0) {
-                        CrossbowUtil.shoot(world, entity, hand, stack, itemStack, fs[i], bl, speed, divergence, 0.0F, i);
+                    if (world.getGameRules().getBoolean(ArmaInfinitum.CROSSBOW_MULTISHOT_RANDOM)) {
+                        if (i == 0) {
+                            CrossbowUtil.shoot(world, entity, hand, stack, itemStack, fs[i], bl, speed, divergence, 0.0F, i);
+                        } else {
+                            CrossbowUtil.shoot(world, entity, hand, stack, itemStack, fs[i], bl, speed, divergence, entity.getRandom().nextFloat() * 20 - 10, i);
+                        }
                     } else {
-                        float r = entity.getRandom().nextFloat() * 20 - 10;
-                        CrossbowUtil.shoot(world, entity, hand, stack, itemStack, fs[i], bl, speed, divergence, r, i);
+                        CrossbowUtil.shoot(world, entity, hand, stack, itemStack, fs[i], bl, speed, divergence, ThrowItemUtil.genAngle(0.0f, list.size(), i, spread), i);
                     }
                 } else {
                     if (i == 0) {
@@ -62,7 +69,7 @@ public abstract class CrossbowItemMixin {
     /**
      * @author crosby
      * @reason
-     * @todo replace by modifying the value of 'j' in the original method
+     * todo replace by modifying the value of 'j' in the original method
      */
     @Overwrite
     private static boolean loadProjectiles(LivingEntity shooter, ItemStack projectile) {

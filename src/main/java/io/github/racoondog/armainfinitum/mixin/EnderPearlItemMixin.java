@@ -33,8 +33,7 @@ public abstract class EnderPearlItemMixin {
                     ThrowItemUtil.shootEnderPearl(world, user, stack, ThrowItemUtil.genRandom(user.getPitch(), random, spread), ThrowItemUtil.genRandom(user.getYaw(), random, spread));
                 } else {
                     //Not Random
-                    //Temp
-                    ThrowItemUtil.shootEnderPearl(world, user, stack, ThrowItemUtil.genRandom(user.getPitch(), random, spread), ThrowItemUtil.genRandom(user.getYaw(), random, spread));
+                    ThrowItemUtil.shootEnderPearl(world, user, stack, ThrowItemUtil.genRandom(user.getPitch(), random, spread), ThrowItemUtil.genAngle(user.getYaw(), count, i, spread));
                 }
             }
         }

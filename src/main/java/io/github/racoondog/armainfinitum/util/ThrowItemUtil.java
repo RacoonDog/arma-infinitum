@@ -18,6 +18,13 @@ public class ThrowItemUtil {
         return start + randomFloat;
     }
 
+    public static float genAngle(float start, int count, int index, int spread) {
+        float sprd = (float) spread;
+        float angle = sprd / count;
+        angle = angle * index - (sprd / 2);
+        return start + angle;
+    }
+
     public static int countProjectiles(int level) {
         if (level == 1 || level == 2) {
             return 3;
@@ -29,7 +36,7 @@ public class ThrowItemUtil {
     public static void shootSnowball(World world, PlayerEntity user, ItemStack itemStack, float pitch, float yaw) {
         SnowballEntity entity = new SnowballEntity(world, user);
         entity.setItem(itemStack);
-        entity.setProperties(user, pitch, yaw, 0.0f, 1.5f, 1.0f);
+        entity.setVelocity(user, pitch, yaw, 0.0f, 1.5f, 1.0f);
         if (EnchantmentHelper.getLevel(Enchantments.FLAME, itemStack) > 0) {
             entity.setOnFireFor(100 * EnchantmentHelper.getLevel(Enchantments.FLAME, itemStack));
         }
@@ -39,7 +46,7 @@ public class ThrowItemUtil {
     public static void shootEgg(World world, PlayerEntity user, ItemStack itemStack, float pitch, float yaw) {
         EggEntity entity = new EggEntity(world, user);
         entity.setItem(itemStack);
-        entity.setProperties(user, pitch, yaw, 0.0f, 1.5f, 1.0f);
+        entity.setVelocity(user, pitch, yaw, 0.0f, 1.5f, 1.0f);
         if (EnchantmentHelper.getLevel(Enchantments.FLAME, itemStack) > 0) {
             entity.setOnFireFor(100 * EnchantmentHelper.getLevel(Enchantments.FLAME, itemStack));
         }
@@ -49,7 +56,7 @@ public class ThrowItemUtil {
     public static void shootEnderPearl(World world, PlayerEntity user, ItemStack itemStack, float pitch, float yaw) {
         EnderPearlEntity entity = new EnderPearlEntity(world, user);
         entity.setItem(itemStack);
-        entity.setProperties(user, pitch, yaw, 0.0f, 1.5f, 1.0f);
+        entity.setVelocity(user, pitch, yaw, 0.0f, 1.5f, 1.0f);
         if (EnchantmentHelper.getLevel(Enchantments.FLAME, itemStack) > 0) {
             entity.setOnFireFor(100 * EnchantmentHelper.getLevel(Enchantments.FLAME, itemStack));
         }

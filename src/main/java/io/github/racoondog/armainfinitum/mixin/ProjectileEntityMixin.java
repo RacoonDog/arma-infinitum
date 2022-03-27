@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ProjectileEntity.class)
 public abstract class ProjectileEntityMixin {
-    @Inject(method = "onEntityHit", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "onEntityHit", at = @At("HEAD"))
     protected void onEntityHit(EntityHitResult entityHitResult, CallbackInfo info) {
         if (!(((ProjectileEntity) (Object) this) instanceof PersistentProjectileEntity)) {
             Entity entity = entityHitResult.getEntity();

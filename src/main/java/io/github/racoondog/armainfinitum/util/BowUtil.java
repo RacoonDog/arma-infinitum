@@ -13,7 +13,7 @@ public class BowUtil {
     public static void shoot(World world, LivingEntity user, ItemStack stack, float pitch, float yaw, float pullProgress) {
         ArrowItem arrowItem = (ArrowItem)(stack.getItem() instanceof ArrowItem ? stack.getItem() : Items.ARROW);
         PersistentProjectileEntity persistentProjectileEntity = arrowItem.createArrow(world, stack, user);
-        persistentProjectileEntity.setProperties(user, pitch, yaw, 0.0f, pullProgress * 3.0f, 1.0f);
+        persistentProjectileEntity.setVelocity(user, pitch, yaw, 0.0f, pullProgress * 3.0f, 1.0f);
 
         if (pullProgress == 1.0f) {
             persistentProjectileEntity.setCritical(true);
